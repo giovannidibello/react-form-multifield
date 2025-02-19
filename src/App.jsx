@@ -30,8 +30,16 @@ function App() {
   // funzione di gestione dell'invio del form
   function handleSubmit(e) {
     e.preventDefault();
-    setPostsList((currentPost) => [...currentPost, { id: currentPost[currentPost.length - 1].id + 1, ...formData }]);
+    setPostsList((currentPost) => [...currentPost, { id: currentPost.length === 0 ? 1 : currentPost[currentPost.length - 1].id + 1, ...formData }]);
     setFormData(initialFormData);
+  }
+
+  // funzione rimozione post
+  const removePost = (id) => {
+    const updatedList = postsList.filter((post) => {
+      return post.id !== id
+    });
+    setPostsList(updatedList);
   }
 
 
@@ -97,7 +105,9 @@ function App() {
             <p>{post.contenuto}</p>
             <h5>{post.categoria}</h5>
             <span className='pubblicato'>{post.pubblicato ? "Pubblicato" : "Non ancora pubblicato"}</span>
-          </div>
+            <br />
+            <button onClick={() => removePost(post.id)}>Cancella Post</button>
+          </div >
         ))
 
       }

@@ -30,7 +30,6 @@ function App() {
   function handleSubmit(e) {
     e.preventDefault();
     setPostsList((currentPost) => [...currentPost, { id: currentPost[currentPost.length - 1].id + 1, ...formData }]);
-
     setFormData(initialFormData);
   }
 
@@ -38,7 +37,7 @@ function App() {
   return (
     <>
 
-      <form id='formpost' action="#" onSubmit={handleSubmit}>
+      <form id='formpost' onSubmit={handleSubmit}>
         {/* valore titolo post */}
         <input
           type="text"
@@ -59,7 +58,7 @@ function App() {
 
         {/* valore contenuto */}
         <textarea
-          name="description"
+          name="contenuto"
           onChange={handleFormData}
           value={formData.contenuto}
           placeholder='Contenuto Post'
@@ -67,7 +66,7 @@ function App() {
 
         {/* valore categoria */}
         <input
-          type="texy"
+          type="text"
           name="categoria"
           onChange={handleFormData}
           value={formData.categoria}
@@ -79,12 +78,17 @@ function App() {
       </form>
 
 
-      {/* <ul className="lista">
-        {listaArticoli.map((articolo, i) => (<li key={i}>{articolo}
-          <button onClick={() => rimuoviArticolo(i)}> <i class="fa-solid fa-trash-can"></i>
-          </button>
-        </li>))}
-      </ul > */}
+      {
+        postsList.map((post) => (
+          <div className='postItem' key={post.id}>
+            <h2>{post.titolo}</h2>
+            <h4>{post.autore}</h4>
+            <p>{post.contenuto}</p>
+            <span>{post.categoria}</span>
+          </div>
+        ))
+
+      }
     </>
   )
 }

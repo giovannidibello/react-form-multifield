@@ -8,6 +8,7 @@ const initialFormData = {
   autore: "",
   contenuto: "",
   categoria: "",
+  pubblicato: false,
 };
 
 function App() {
@@ -73,6 +74,16 @@ function App() {
           placeholder='Categoria Post'
         />
 
+        {/* valore disponibilità */}
+        <label htmlFor="pubblicato">Disponibile</label>
+        <input
+          type="checkbox"
+          name="pubblicato"
+          checked={formData.pubblicato}
+          onChange={handleFormData}
+          id="pubblicato"
+        />
+
         {/* bottone di invio info */}
         <button>Aggiungi</button>
       </form>
@@ -84,7 +95,8 @@ function App() {
             <h2>{post.titolo}</h2>
             <h4>{post.autore}</h4>
             <p>{post.contenuto}</p>
-            <span>{post.categoria}</span>
+            <h5>{post.categoria}</h5>
+            <span className='pubblicato'>{post.pubblicato ? "Pubblicato" : "Non ancora pubblicato"}</span>
           </div>
         ))
 
